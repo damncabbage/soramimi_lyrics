@@ -27,6 +27,21 @@ describe SoramimiLyrics do
   end
 
   context "when parsing" do
+    def test_fixture(filename_stem)
+      full_stem = File.join(fixtures_path, filename_stem)
+      fixtures = {}
+      ['dump', 'plain', 'txt'].each do |ext|
+        fixtures[ext] = File.open(full_stem + '.dump', 'rb') { |f| f.read }
+      end
+
+      # Load...
+      lyrics = SoramimiLyrics.import(fixtures['txt'])
+
+      # And check:
+      lyrics.to_plain_lyrics.should == fixtures['plain']
+      Marshall.load(fixtures['dump']).should == lyrics.to_timecodes
+    end
+    
     pending "should parse well-formed files with basic timestamps and blank lines"
     pending "should parse blank files"
     pending "should parse files with no timestamps"
