@@ -4,27 +4,34 @@ Soramimi Lyrics
 A [Soramimi Karaoke](http://soramimi.nl) lyrics parser. Lyrics go in, objects come out; can't explain that.
 
 
-Usage
------
-
-Grab it:
+Install it:
 
 ```
 gem install soramimi-lyrics
 ```
 
-Now use it:
+Grab your lyrics:
 
 ```
 require 'soramimi-lyrics'
 
 # Open up a file:
-song = SoramimiLyrics.new(:file => '/path/to/soramimi/lyrics.txt')
+song = SoramimiLyrics.open('/path/to/soramimi/lyrics.txt')
 
-# Or parse straight from a string:
+# Parse straight from a string:
 lyrics = SoramimiLyrics.new(lyrics_string)
 
-# Suck the contents back out in whatever format necessary
+# Or build it up:
+lyrics = SoramimiLyrics.new
+lyrics.add_line(%w{ Oh man! })
+# ...
+
+```
+
+Now spit the contents back out in varying formats:
+
+```
+# Directly compatible with Soramimi Karaoke (ostensibly the original if imported from a file or string).
 lyrics.to_soramimi_lyrics
   => "[01:06:07]Beat[01:06:30]ing [01:06:56]up [01:06:83]the [01:07:09]wrong [01:07:52]guy[01:08:03]\n[01:08:50]Oh [01:08:93]man![01:09:48]"
 
@@ -54,7 +61,7 @@ English songs have a high rate of one-syllable-per-word lyrics. Japanese, on the
 * `Beat|ing up the wrong guy / Oh man!`: 6 one-syllable words, 1 two-syllable words.
 * `Fu|ki|ton|de yu|ku fu|u|kei / ko|ru|ga|ru yo|u ni ma|e`: 2 four-syllable, 1 three-syllable, 3 two-syllable, 1 one-syllable "words".
 
-(Soramimi was ostensibly made for Japanese karaoke, and so the `to_timecode` return format is targeted at Japanese songs.)
+(Soramimi Karaoke was originally made for displaying Japanese song lyrics in Rōmaji, and so the `to_timecode` return format is targeted at this.)
 
 
 License
