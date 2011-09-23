@@ -5,9 +5,21 @@ describe SoramimiLyrics do
     SoramimiLyrics.should be_a(Module)
   end
 
+  let (:fixtures_path) { File.join(PROJECT_ROOT, 'spec', 'fixtures') }
+
   context "when directed to import a file" do
-    pending "should open a file when importing"
-    pending "should complain when opening a non-existent file"
+    it "should open a file when importing" do
+      target = File.join(fixtures_path, 'blank.txt')
+      File.should_receive(:open).with(target, 'rb').and_return('')
+      lyrics = SoramimiLyrics.import(:file => target)
+      lyrics.to_timecodes.should == []
+    end
+
+    it "should complain when opening a non-existent file" do
+      target = File.join(fixtures_path, 'doesnt_exist.txt')
+      File.should_receive(:open).with(target, 'rb').and_raise(::Errno::ENOENT)
+      lambda { SoramimiLyrics.import(:file => target) }.should raise_error(Errno::ENOENT)
+    end
   end
 
   context "when directed to import a string" do
