@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    soramimi-lyrics (0.0.1)
+    soramimi_lyrics (0.0.1)
 
 GEM
   remote: https://rubygems.org/
@@ -25,4 +25,4 @@ PLATFORMS
 DEPENDENCIES
   parslet
   rspec
-  soramimi-lyrics!
+  soramimi_lyrics!
