@@ -7,7 +7,7 @@ module SoramimiLyrics
     options = (args.last.is_a?(::Hash) ? args.pop : {}) 
 
     text = args.pop
-    unless options[:file].empty?
+    if options[:file] && options[:file].length > 0
       text = File.open(options[:file], 'rb') { |f| f.read }
     end
 
