@@ -1,4 +1,5 @@
 require 'spec_helper'
+require 'json'
 
 describe SoramimiLyrics do
   it "should be valid" do
@@ -30,7 +31,7 @@ describe SoramimiLyrics do
     def test_with_fixture(filename_stem)
       full_stem = File.join(fixtures_path, filename_stem)
       fixtures = {}
-      ['dump', 'plain', 'txt'].each do |ext|
+      ['json', 'plain', 'txt'].each do |ext|
         fixtures[ext] = File.open("#{full_stem}.#{ext}", 'rb') { |f| f.read }
       end
 
@@ -40,7 +41,7 @@ describe SoramimiLyrics do
       # And check the output we receive matches up
       # with the pre-calculated results:
       lyrics.to_plain_lyrics.should == fixtures['plain']
-      Marshall.load(fixtures['dump']).should == lyrics.to_timecodes
+      JSON.parse(fixtures['json']).should == lyrics.to_json
     end
     
     it "should parse well-formed files with basic timestamps and blank lines" do
