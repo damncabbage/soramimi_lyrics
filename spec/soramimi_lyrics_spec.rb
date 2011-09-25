@@ -33,15 +33,15 @@ describe SoramimiLyrics do
       fixtures = {}
       ['json', 'plain', 'txt'].each do |ext|
         fixtures[ext] = File.open("#{full_stem}.#{ext}", 'rb') { |f| f.read }
+        fixtures[ext].chomp!
       end
 
       # Load...
       lyrics = SoramimiLyrics.import(fixtures['txt'])
 
-      # And check the output we receive matches up
-      # with the pre-calculated results:
+      # Check the output we receive matches up with the pre-calculated results
       lyrics.to_plain_lyrics.should == fixtures['plain']
-      JSON.parse(fixtures['json']).should == lyrics.to_json
+      fixtures['json'].should == lyrics.to_timecodes.to_json
     end
     
     it "should parse well-formed files with basic timestamps and blank lines" do
