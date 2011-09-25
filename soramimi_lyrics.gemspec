@@ -18,4 +18,5 @@ Gem::Specification.new do |s|
   s.require_path  = 'lib'
 
   s.add_development_dependency 'rspec'
+  s.add_development_dependency 'json'
 end

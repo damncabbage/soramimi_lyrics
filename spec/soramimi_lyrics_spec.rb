@@ -12,14 +12,14 @@ describe SoramimiLyrics do
     it "should open a file when importing" do
       target = File.join(fixtures_path, 'blank.txt')
       File.should_receive(:open).with(target, 'rb').and_return('')
-      lyrics = SoramimiLyrics.import(:file => target)
+      lyrics = SoramimiLyrics.load(target)
       lyrics.to_timecodes.should == []
     end
 
     it "should complain when opening a non-existent file" do
       target = File.join(fixtures_path, 'doesnt_exist.txt')
       File.should_receive(:open).with(target, 'rb').and_raise(::Errno::ENOENT)
-      lambda { SoramimiLyrics.import(:file => target) }.should raise_error(Errno::ENOENT)
+      lambda { SoramimiLyrics.load(target) }.should raise_error(Errno::ENOENT)
     end
   end
 
@@ -36,8 +36,7 @@ describe SoramimiLyrics do
         fixtures[ext].chomp!
       end
 
-      # Load...
-      lyrics = SoramimiLyrics.import(fixtures['txt'])
+      lyrics = SoramimiLyrics.parse(fixtures['txt'])
 
       # Check the output we receive matches up with the pre-calculated results
       lyrics.to_plain_lyrics.should == fixtures['plain']

@@ -15,15 +15,15 @@ Grab your lyrics:
 ```
 require 'soramimi-lyrics'
 
-# Open up a file:
-song = SoramimiLyrics.open('/path/to/soramimi/lyrics.txt')
-
 # Parse straight from a string:
-lyrics = SoramimiLyrics.new(lyrics_string)
+song = SoramimiLyrics.parse(lyrics_string)
+
+# Open up a file:
+song = SoramimiLyrics.load('/path/to/soramimi/lyrics.txt')
 
 # Or build it up:
-lyrics = SoramimiLyrics.new
-lyrics.add_line(%w{ Oh man! })
+song = SoramimiLyrics.new
+song.add_line(%w{ Oh man! })
 # ...
 
 ```
@@ -32,13 +32,13 @@ Now spit the contents back out in varying formats:
 
 ```
 # Directly compatible with Soramimi Karaoke (ostensibly the original if imported from a file or string).
-lyrics.to_soramimi_lyrics
+song.to_soramimi_lyrics
   => "[01:06:07]Beat[01:06:30]ing [01:06:56]up [01:06:83]the [01:07:09]wrong [01:07:52]guy[01:08:03]\n[01:08:50]Oh [01:08:93]man![01:09:48]"
 
-lyrics.to_plain_lyrics
+song.to_plain_lyrics
   => "Beating up the wrong guy\nOh man!"
 
-lyrics.to_timecodes
+song.to_timecodes
   => [
        [ [{ :syllable => "Beat", :begin => 66070, :end => 66300 }, { :syllable => "ing", :begin => 66300, :end => 66560}],
          [{ :syllable => "up", :begin => 66560, :end => 66830 }],
@@ -61,7 +61,7 @@ English songs have a high rate of one-syllable-per-word lyrics. Japanese, on the
 * `Beat|ing up the wrong guy / Oh man!`: 6 one-syllable words, 1 two-syllable words.
 * `Fu|ki|ton|de yu|ku fu|u|kei / ko|ru|ga|ru yo|u ni ma|e`: 2 four-syllable, 1 three-syllable, 3 two-syllable, 1 one-syllable "words".
 
-(Soramimi Karaoke was originally made for displaying Japanese song lyrics in Rōmaji, and so the `to_timecode` return format is targeted at this.)
+(Soramimi Karaoke was originally made for displaying Japanese song lyrics in Rōmaji, and so the `to_timecodes` return format is targeted at this.)
 
 
 License

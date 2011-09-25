@@ -1,17 +1,13 @@
 module SoramimiLyrics
-  autoload :Base, "soramimi_lyrics/base"
+  autoload :Song, "soramimi_lyrics/song"
 
-  def self.import(*args)
-    # Do a manual args.extract_options! - we can't rely on
-    # activesupport being present.
-    options = (args.last.is_a?(::Hash) ? args.pop : {}) 
+  def self.parse(text)
+    SoramimiLyrics::Song.new(text, :format => :soramimi)
+  end
 
-    text = args.pop
-    if options[:file] && options[:file].length > 0
-      text = File.open(options[:file], 'rb') { |f| f.read }
-    end
-
-    SoramimiLyrics::Base.new(text)
+  def self.load(path)
+    text = File.open(path, 'rb') { |f| f.read }
+    SoramimiLyrics::Song.new(text, :format => :soramimi)
   end
     
 end
