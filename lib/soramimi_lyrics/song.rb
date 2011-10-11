@@ -17,10 +17,9 @@ module SoramimiLyrics
                    end
     end
 
-    class << self
-      def parse(source)
-        []
-      end
+    # Convenience method to ask the parsing module for the result.
+    def self.parse(source)
+      SoramimiLyrics::Parsing.parse(source)
     end
 
     def to_timecodes
