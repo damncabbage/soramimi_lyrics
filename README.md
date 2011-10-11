@@ -7,13 +7,13 @@ A [Soramimi Karaoke](http://soramimi.nl) lyrics parser. Lyrics go in, objects co
 Install it:
 
 ```
-gem install soramimi-lyrics
+gem install soramimi_lyrics # TODO: Not published as a gem yet.
 ```
 
 Grab your lyrics:
 
 ```
-require 'soramimi-lyrics'
+require 'soramimi_lyrics'
 
 # Parse straight from a string:
 song = SoramimiLyrics.parse(lyrics_string)
