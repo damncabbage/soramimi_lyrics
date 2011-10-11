@@ -40,15 +40,14 @@ song.to_plain_lyrics
 
 song.to_timecodes
   => [
-       [ [{ :syllable => "Beat", :begin => 66070, :end => 66300 }, { :syllable => "ing", :begin => 66300, :end => 66560}],
-         [{ :syllable => "up", :begin => 66560, :end => 66830 }],
-         [{ :syllable => "the", :begin => 66830, :end => 67090 }],
-         [{ :syllable => "wrong", :begin => 67090, :end => 67520 }],
-         [{ :syllable => "guy", :begin => 67520, :end => 68030 }]
-       ],
-       [ [{ :syllable => "Oh", :begin => 68500, :end => 68930 }],
-         [{ :syllable => "man!", :begin => 68930, :end => 69480 }]
-       ]
+       [ { :syllable => "Beat", :begin => 66070, :end => 66300 },
+	     { :syllable => "ing ", :begin => 66300, :end => 66560},
+         { :syllable => "up ", :begin => 66560, :end => 66830 },
+         { :syllable => "the ", :begin => 66830, :end => 67090 },
+         { :syllable => "wrong ", :begin => 67090, :end => 67520 },
+         { :syllable => "guy", :begin => 67520, :end => 68030 } ],
+       [ { :syllable => "Oh ", :begin => 68500, :end => 68930 },
+         { :syllable => "man!", :begin => 68930, :end => 69480 } ]
      ]
 ```
 
