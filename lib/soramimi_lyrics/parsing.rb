@@ -46,8 +46,13 @@ module SoramimiLyrics
 
     class Transformer < Parslet::Transform
       # TODO
-      # rule(:lines)
-      # rule(:line)
+      rule(:min => simple(:min), :sec => simple(:sec), :msec => simple(:msec), :syllable => simple(:text)) {
+        {:min => min, :text => text}
+      }
+      rule(:min => simple(:min), :sec => simple(:sec), :msec => simple(:msec)) {
+        {:min => min, :text => nil}
+      }
+      rule(:line => sequence(:syllables)) { syllables.last.text = nil; syllables }
     end
   end
 end
